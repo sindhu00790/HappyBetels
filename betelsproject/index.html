@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium quality betel leaves (paan) delivered fresh to your doorstep">
+    <title>HappyBetels - Premium Betel Leaves</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Three.js Import -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.min.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    
+    <style>
+        /* Floating Leaf Particles Background */
+        #leaf-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Ensure content appears above particles */
+        body {
+            position: relative;
+            background-color: #f8f8f8;
+        }
+        
+        /* Adjust z-index for all content sections */
+        section, nav, footer {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Leaf Particles Background (Three.js) -->
+    <div id="leaf-particles"></div>
+
+    <!-- Navigation -->
+    <!-- <nav class="navbar navbar-expand-lg glass-nav">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="logo-icon">🍃</span>
+                <span class="logo-text">Happy Betels</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#benefits">Benefits</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <div class="nav-cta ms-lg-4">
+                     <a href="#" class="btn btn-primary">Order Now</a> -->
+                <!-- </div>
+            </div>
+        </div>
+    </nav>  -->
+
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg glass-nav">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <span class="logo-icon">🍃</span>
+            <span class="logo-text">Happy Betels</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="nav-box-container">
+                <div class="nav-box">
+                    <a class="nav-link active" href="#">Home</a>
+                </div>
+                <div class="nav-box">
+                    <a class="nav-link" href="#about">About</a>
+                </div>
+                <div class="nav-box">
+                    <a class="nav-link" href="#products">Products</a>
+                </div>
+                <div class="nav-box">
+                    <a class="nav-link" href="#benefits">Benefits</a>
+                </div>
+                <div class="nav-box">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title">Premium <span>Betel Leaves</span> for Discerning Palates</h1>
+                    <p class="hero-subtitle">Traditionally cultivated, meticulously selected, and delivered with care</p>
+                    <div class="hero-cta">
+                        <a href="#products" class="btn btn-primary btn-lg me-3">Explore Varieties</a>
+                        <a href="#benefits" class="btn btn-outline-light btn-lg">Learn Benefits</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 hero-3d">
+                    <div id="betel-leaf-3d"></div>
+                </div>
+            </div>
+        </div>
+
+
+        
+        
+        <!-- Animated Vine Decoration -->
+        <div class="vine-decoration">
+            <svg class="vine-path" viewBox="0 0 1440 200" preserveAspectRatio="none">
+                <path class="vine" d="M0,100 C150,200 350,0 500,100 C650,200 850,0 1000,100 C1150,200 1350,0 1440,100"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                &nbsp;
+                &nbsp;
+                <h2>Our <span>Story</span></h2>
+                <p>A fresh approach to traditional betel leaves</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <div class="image-wrapper">
+                            <img src="assets/images/betel_3.jpg" loading="lazy" alt="Betel leaf farm" class="img-fluid rounded-4">
+                        </div>
+                        <div class="growth-animation">
+                            <div class="leaf-growth" data-count="5000"></div>
+                            <!-- <span>Leaves grown daily</span> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h3>Traditional Methods, Modern Standards</h3>
+                        <p>At Happy Betels, we combine centuries-old cultivation techniques with modern quality control to deliver betel leaves of exceptional quality and freshness.</p>
+                        
+                        <div class="about-features">
+                            <div class="feature-item">
+                                <!-- <div class="feature-icon">🌱</div> -->
+                                <div class="feature-text">
+                                    <h4>🌱 Organic Cultivation</h4>
+                                    <p>Grown without synthetic pesticides or fertilizers</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <!-- <div class="feature-icon">✋</div> -->
+                                <div class="feature-text">
+                                    <h4>✋ Hand Selected</h4>
+                                    <p>Each leaf individually inspected for quality</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <!-- <div class="feature-icon">🚚</div> -->
+                                <div class="feature-text">
+                                    <h4>🚚  Fast Delivery</h4>
+                                    <p>Shipped within hours of harvest</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section id="products" class="product-section">
+        <div class="container">
+
+            &nbsp;
+            &nbsp;
+            <div class="section-header">
+                <h2>Our <span>Premium</span> Selection</h2>
+                <p>Choose from our curated varieties of betel leaves</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Product Card 1 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <div class="product-card-inner">
+                            <div class="product-card-front">
+                                <div class="product-image">
+                                    <img src="assets/images/betel_2.jpg" loading="lazy" alt="Maghai Paan" class="img-fluid">
+                                </div>
+                                <div class="product-info">
+                                    <h3>Maghai Premium</h3>
+                                    <div class="product-rating">
+                                        ★★★★★ <span>(48)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card-back">
+                                <h3>Maghai Premium</h3>
+                                <p>The classic variety known for its large, tender leaves and perfect balance of pungency and sweetness.</p>
+                                <div class="product-details">
+                                    <p><strong>Origin:</strong> Karaikudi, India</p>
+                                    <p><strong>Texture:</strong> Soft & Juicy</p>
+                                </div>
+                                <div class="product-price">
+                                    Rs.75 <span>/ 50 leaves</span>
+                                </div>
+                                <!-- <button class="btn btn-outline-light">Add to Cart</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 2 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <div class="product-card-inner">
+                            <div class="product-card-front">
+                                <div class="product-image">
+                                    <img src="assets/images/betel_5.jpg" loading="lazy" alt="Banarasi Paan" class="img-fluid">
+                                </div>
+                                <div class="product-info">
+                                    <h3>Banarasi Special</h3>
+                                    <div class="product-rating">
+                                        ★★★★★ <span>(36)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card-back">
+                                <h3>Banarasi Special</h3>
+                                <p>Famous for its thick, crunchy texture and robust flavor, preferred for traditional paan preparations.</p>
+                                <div class="product-details">
+                                    <p><strong>Origin:</strong> Karaikudi, India</p>
+                                    <p><strong>Texture:</strong> Crunchy & Aromatic</p>
+                                </div>
+                                <div class="product-price">
+                                    Rs.75 <span>/ 50 leaves</span>
+                                </div>
+                                <!-- <button class="btn btn-outline-light">Add to Cart</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 3 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <div class="product-card-inner">
+                            <div class="product-card-front">
+                                <div class="product-image">
+                                    <img src="assets/images/betel_6.jpg" loading="lazy" alt="Kali Mirch Paan" class="img-fluid">
+                                </div>
+                                <div class="product-info">
+                                    <h3>Kali Mirch</h3>
+                                    <div class="product-rating">
+                                        ★★★★☆ <span>(29)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card-back">
+                                <h3>Kali Mirch</h3>
+                                <p>A bold variety with peppery notes, perfect for those who enjoy a stronger, more pungent betel leaf experience.</p>
+                                <div class="product-details">
+                                    <p><strong>Origin:</strong> Karaikudi, India</p>
+                                    <p><strong>Texture:</strong> Firm & Spicy</p>
+                                </div>
+                                <div class="product-price">
+                                    Rs.75 <span>/ 50 leaves</span>
+                                </div>
+                                <!-- <button class="btn btn-outline-light">Add to Cart</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <div class="text-center mt-5">
+                <a href="products.html" class="btn btn-primary btn-lg">View All Varieties</a>
+            </div> -->
+        </div>
+    </section>
+      <div>
+&nbsp;
+      </div>
+      <div>
+
+        &nbsp;
+      </div>
+    <!-- Health Benefits Timeline -->
+    <section id="benefits" class="benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Health <span>Benefits</span></h2>
+                <p>Discover the traditional and modern advantages of betel leaves</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">🌿</div>
+                        <h3>Digestive Aid</h3>
+                        <p>Betel leaves stimulate digestion and can help relieve constipation when consumed after meals.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">❤️</div>
+                        <h3>Oral Health</h3>
+                        <p>The antimicrobial properties help maintain oral hygiene and freshen breath naturally.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">🧠</div>
+                        <h3>Cognitive Function</h3>
+                        <p>Traditional medicine suggests betel leaves may help improve concentration and mental clarity.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">🩹</div>
+                        <h3>Wound Healing</h3>
+                        <p>Applied topically, betel leaves have been shown to accelerate wound healing due to their antimicrobial properties.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">🛡️</div>
+                        <h3>Antioxidant Rich</h3>
+                        <p>Contains powerful antioxidants that help combat oxidative stress in the body.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+
+     <div>
+&nbsp;
+      </div>
+
+
+    &nbsp;
+
+    <!-- Testimonials -->
+    <!-- <section class="testimonial-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our <span>Customers</span> Say</h2>
+                <p>Authentic experiences from betel leaf connoisseurs</p>
+            </div>
+            
+            <div class="row g-4 ">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card-inner">
+                            <div class="testimonial-card-front">
+                                <div class="testimonial-image">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" loading="lazy" alt="Customer" class="img-fluid rounded-circle">
+                                </div>
+                                <div class="testimonial-rating">
+                                    ★★★★★
+                                </div>
+                                <h3>Urmila Selvan</h3>
+                                <p>Founder Of HappyBetels</p>
+                            </div>
+                            <div class="testimonial-card-back">
+                                <p>"I've been sourcing betel leaves for my shop for 15 years, and Happy Betels consistently provides the freshest, most aromatic leaves. My customers can tell the difference!"</p>
+                                <div class="testimonial-location">
+                                    <span>📍</span> Mumbai, India
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card-inner">
+                            <div class="testimonial-card-front">
+                                <div class="testimonial-image">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" loading="lazy" alt="Customer" class="img-fluid rounded-circle">
+                                </div>
+                                <div class="testimonial-rating">
+                                    ★★★★★
+                                </div>
+                                <h3>Priya Sharma</h3>
+                                <p>Ayurvedic Practitioner</p>
+                            </div>
+                            <div class="testimonial-card-back">
+                                <p>"For my herbal preparations, I need betel leaves of the highest quality. Happy Betels never disappoints - their organic cultivation methods make all the difference in potency."</p>
+                                <div class="testimonial-location">
+                                    <span>📍</span> Bangalore, India
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card-inner">
+                            <div class="testimonial-card-front">
+                                <div class="testimonial-image">
+                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" loading="lazy" alt="Customer" class="img-fluid rounded-circle">
+                                </div>
+                                <div class="testimonial-rating">
+                                    ★★★★☆
+                                </div>
+                                <h3>Amir Khan</h3>
+                                <p>Home Enthusiast</p>
+                            </div>
+                            <div class="testimonial-card-back">
+                                <p>"As someone who enjoys paan after meals, I appreciate how fresh these leaves arrive, even overseas. The vacuum packaging really preserves the flavor and texture."</p>
+                                <div class="testimonial-location">
+                                    <span>📍</span> Dubai, UAE
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Our Vision Section -->
+<section class="vision-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our <span>Founding Vision</span></h2>
+            <p>The passion and principles behind Happy Betels</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Vision Card 1 -->
+            <div class="col-md-4">
+                <div class="vision-card">
+                    <div class="vision-icon">🌱</div>
+                    <h3>Quality First</h3>
+                    <blockquote>
+                        "We started with one simple principle - never compromise on quality. Each leaf is hand-selected at peak freshness to ensure you receive only the best."
+                    </blockquote>
+                    <div class="vision-author">
+                        <p>- Urmilaselvan, Our Founder</p>
+                        <p class="location">📍 Karaikudi, India</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vision Card 2 -->
+            <div class="col-md-4">
+                <div class="vision-card">
+                    <div class="vision-icon">🌿</div>
+                    <h3>Sustainable Growth</h3>
+                    <blockquote>
+                        "Our farming methods respect both tradition and the environment. We're building a business that nourishes both people and the land it grows from."
+                    </blockquote>
+                    <div class="vision-author">
+                        <p>- Our Farming Team</p>
+                        <p class="location">📍 Our Fields</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vision Card 3 -->
+            <div class="col-md-4">
+                <div class="vision-card">
+                    <div class="vision-icon">🤝</div>
+                    <h3>Future Promise</h3>
+                    <blockquote>
+                        "As we begin this journey, we pledge to maintain the highest standards while innovating to bring you betel leaves that honor tradition and delight the senses."
+                    </blockquote>
+                    <div class="vision-author">
+                        <p>- The Happy Betels Team</p>
+                        <p class="location">📍 For Our Customers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    &nbsp;
+    &nbsp;
+
+   <!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="row justify-content-center"> <!-- Added justify-content-center here -->
+            <div class="col-lg-8 text-center"> <!-- Changed to col-lg-8 and added text-center -->
+                <div class="section-header">
+                    <h2>Get In <span>Touch</span></h2>
+                    <p>We'd love to hear from you</p>
+                </div>
+                
+
+                <div class="contact-methods">
+                    <div class="contact-item">
+                        <!-- <div class="contact-icon">📧</div> -->
+                        <div class="contact-text">
+                            <h4>📧 Email Us</h4>
+                            <a href="mailto:Happybetels@gmail.com ">Happybetels@gmail.com </a>
+                        </div>
+                    </div>
+                    
+                    &nbsp;
+
+                    <div class="contact-item">
+                        <!-- <div class="contact-icon">📞</div> -->
+                        <div class="contact-text">
+                            <h4>📞 Call Us</h4>
+                            <a href="tel:+919442048027">+91 9442048027</a>
+                        </div>
+                    </div>
+                    
+                    &nbsp;
+
+                    <div class="contact-item">
+                        <!-- <div class="contact-icon">📍</div> -->
+                        <div class="contact-text">
+                            <h4>📍 Visit Us</h4>
+                            <p>Arumugam nagar, karaikudi, India</p>
+                        </div>
+                    </div>
+                </div>
+                
+                &nbsp;
+
+                <!-- <div class="social-links mt-4">
+                    <a href="#" class="social-icon">📘</a>
+                    <a href="#" class="social-icon">📸</a>
+                    <a href="#" class="social-icon">🐦</a>
+                    <a href="#" class="social-icon">📱</a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</section>
+                
+                <!-- <div class="col-lg-6">
+                    <div class="contact-form-wrapper">
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" required>
+                                <label for="name">Your Name</label>
+                                <div class="leaf-decoration"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email">Email Address</label>
+                                <div class="leaf-decoration"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone">
+                                <label for="phone">Phone Number</label>
+                                <div class="leaf-decoration"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <textarea id="message" name="message" rows="4" required></textarea>
+                                <label for="message">Your Message</label>
+                                <div class="leaf-decoration"></div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <span class="logo-icon">🍃</span>
+                        <span class="logo-text">Happy Betels</span>
+                    </div>
+                    <p class="footer-about">
+                        Premium quality betel leaves cultivated with care and delivered with passion since 1985.
+                    </p>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h4>Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Maghai Premium</a></li>
+                        <li><a href="#">Banarasi Special</a></li>
+                        <li><a href="#">Kali Mirch</a></li>
+                        <li><a href="#">Meetha Paan Pack</a></li>
+                        <li><a href="#">Gift Boxes</a></li>
+                    </ul>
+                </div>
+                
+                 <div class="col-lg-3 col-md-4">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates and special offers</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+             -->
+            <!-- <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; 2025 Zindhu K Manohar. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="#">Privacy Policy</a> | 
+                        <a href="#">Terms of Service</a> | 
+                        <a href="#">Shipping Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row justify-content-center text-center"> <!-- Added center alignment classes -->
+            <div class="col-lg-4 mb-4"> <!-- Added mb-4 for spacing -->
+                <div class="footer-brand">
+                    <span class="logo-icon">🍃</span>
+                    <span class="logo-text">Happy Betels</span>
+                </div>
+                <p class="footer-about">
+                    Premium quality betel leaves cultivated with care and delivered with passion.
+                </p>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4"> <!-- Added mb-4 for spacing -->
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4"> <!-- Added mb-4 for spacing -->
+                <h4>Products</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Maghai Premium</a></li>
+                    <li><a href="#">Banarasi Special</a></li>
+                    <li><a href="#">Kali Mirch</a></li>
+                    <li><a href="#">Meetha Paan Pack</a></li>
+                    <li><a href="#">Gift Boxes</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom text-center"> <!-- Centered footer bottom -->
+            <div class="row">
+                <div class="col-12">
+                    <p>&copy; 2025 Zindhu K Manohar. All rights reserved.</p>
+                    <div class="footer-policies">
+                        <a href="#">Privacy Policy</a> | 
+                        <a href="#">Terms of Service</a> | 
+                        <a href="#">Shipping Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Three.js Particle Background Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Three.js scene for floating leaves
+            const container = document.getElementById('leaf-particles');
+            if (!container) return;
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+            
+            // Position camera
+            camera.position.z = 5;
+            
+            // Create particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particleCount = 80; // Reduced for better performance
+            
+            // Particle positions
+            const posArray = new Float32Array(particleCount * 3);
+            const sizeArray = new Float32Array(particleCount);
+            
+            for(let i = 0; i < particleCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 10;
+                if(i % 3 === 0) {
+                    sizeArray[i/3] = Math.random() * 0.2 + 0.05;
+                }
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizeArray, 1));
+            
+            // Load leaf texture
+            const textureLoader = new THREE.TextureLoader();
+            const leafTexture = textureLoader.load('https://www.transparentpng.com/thumb/leaf/real-green-leaf-transparent-background-21.png');
+            
+            // Create particle material
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.25,
+                map: leafTexture,
+                transparent: true,
+                alphaTest: 0.01,
+                blending: THREE.AdditiveBlending,
+                color: 0x2E8B57,
+                opacity: 0.7
+            });
+            
+            // Create particle system
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Rotate particles slowly
+                particlesMesh.rotation.y += 0.001;
+                
+                // Float up/down animation
+                const positions = particlesGeometry.attributes.position.array;
+                for(let i = 0; i < particleCount; i++) {
+                    // Animate Y position with slight variation
+                    positions[i * 3 + 1] += Math.sin(Date.now() * 0.001 + i) * 0.0015;
+                    
+                    // Reset position if out of bounds
+                    if(positions[i * 3 + 1] > 5) {
+                        positions[i * 3 + 1] = -5;
+                        positions[i * 3] = (Math.random() - 0.5) * 10;
+                        positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+                    }
+                }
+                particlesGeometry.attributes.position.needsUpdate = true;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        });
+    </script>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/threejs-config.js"></script>
+    <script src="assets/js/gsap-animations.js"></script>
+    <script src="assets/js/main.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const bgImage = document.querySelector('.transparent-bg-image');
+    
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.pageYOffset;
+        const fadeStart = 100; // Start fading after 100px
+        const fadeUntil = 300; // Completely faded at 300px
+        
+        let opacity = 0.2;
+        
+        if (scrollPosition <= fadeStart) {
+            opacity = 0.2;
+        } else if (scrollPosition <= fadeUntil) {
+            opacity = 0.2 - (0.2 * ((scrollPosition - fadeStart) / (fadeUntil - fadeStart)));
+        } else {
+            opacity = 0;
+        }
+        
+        bgImage.style.opacity = opacity;
+    });
+});
+</script>
+</body>
+</html>
